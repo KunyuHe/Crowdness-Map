@@ -1,0 +1,32 @@
+COMMON: &common
+  DEBUG: False
+  # TODO: hide SECRET_KEY
+  SECRET_KEY: insecure
+
+  DEFAULT_PAGE_INDEX: 1
+  DEFAULT_PAGE_SIZE: 10
+
+  # TODO: add database uri
+  SQLALCHEMY_DATABASE_URI:
+  SQLALCHEMY_TRACK_MODIFICATIONS: False
+
+
+  LOGGING_CONFIG_PATH: ./config/logging.yaml
+  LOGGING_PATH: ./logs
+
+  RESPONSE_MESSAGE: ./config/msg.yaml
+
+
+DEVELOPMENT: &development
+  <<: *common
+  DEBUG: True
+
+
+STAGING: &staging
+  <<: *common
+  # TODO: add secrete key for staging
+
+
+PRODUCTION: &production
+  <<: *common
+  # TODO: add secrete key for production
