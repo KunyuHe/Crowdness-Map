@@ -1,0 +1,20 @@
+FROM python:3
+
+RUN apt-get update && apt-get -y install nano \
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/*
+
+ENV TIME_ZONE America/Chicago
+ENV PIPURL "https://pypi.tuna.tsinghua.edu.cn/simple"
+
+RUN echo "${TIME_ZONE}" > /etc/timezone
+RUN ln -sf /usr/share/zoneinfo/${TIME_ZONE} /etc/localtime
+
+RUN mkdir /projects
+WORKDIR /projects
+COPY . /projects/
+
+RUN pip --no-cache-dir install  -i ${PIPURL} --upgrade pip
+RUN pip --no-cache-dir install  -i ${PIPURL} -r requirements.txt
+
+CMD ./run.sh
